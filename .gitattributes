@@ -1,1 +1,12 @@
+
+
+# Force Java detection
 *.java linguist-language=Java
+
+# Ignore Swagger and JS files from language stats
+*.js linguist-vendored
+*.html linguist-vendored
+*.css linguist-vendored
+
+# Ignore build folders
+target/* linguist-vendored
