@@ -1,0 +1,37 @@
+package com.auth.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.auth.service.AuthService;
+import com.auth.security.JwtService;
+import com.example.demo.entity.User;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+@Autowired
+AuthService service;
+
+@Autowired
+JwtService jwt;
+
+@PostMapping("/register")
+public String register(@RequestBody User user){
+
+return service.register(user);
+}
+
+@PostMapping("/login")
+public String login(@RequestBody User user){
+
+return service.login(user.getEmail(),user.getPassword());
+}
+
+@GetMapping("/validate")
+public boolean validate(@RequestHeader("Authorization") String token){
+
+return jwt.validateToken(token.replace("Bearer ",""));
+}
+
+}
